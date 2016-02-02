@@ -2,8 +2,8 @@ import pprint
 import requests #http://docs.python-requests.org/en/latest/user/quickstart/
 
 pp = pprint.PrettyPrinter(indent=2)
-username = ""
-password = ""
+username = "e6f835c5-d844-42dc-9ad4-dd909aaaf99e"
+password = "j9pEuCnmgZio"
 
 
 class SpeechToTextInterface(object):
@@ -37,6 +37,12 @@ class SpeechToTextInterface(object):
                 auth=self.auth,
                 headers={"content-type": "audio/{}".format(audio_type)},
                 data=file,
+                params={
+                    'model': model,
+                    'timestamps': timestamps,
+                    'word_confidence': word_confidence,
+                    'inactivity_timeout': inactivity_timeout,
+                }
             )
 
 
@@ -47,10 +53,10 @@ if __name__ == '__main__':
     speech_to_text = SpeechToTextInterface(username, password)
 
     # See different language models
-    pp.pprint(speech_to_text.models())
+    #pp.pprint(speech_to_text.models())
 
     # See specific model info
     #pp.pprint(speech_to_text.model('en-US_BroadbandModel'))
 
     # Recognize audio file
-    #pp.pprint(speech_to_text.recognize("Taxidermy_a_Squirrel.wav"))
+    pp.pprint(speech_to_text.recognize("Taxidermy_a_Squirrel.wav"))
